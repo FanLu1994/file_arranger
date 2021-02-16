@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: 'my_vue_electron'
+    name: 'file arranger'
   }
 </script>
 

@@ -8,7 +8,7 @@ const { ipcRenderer } = require('electron');
  let router =  new Router({
   routes: [
     {
-      path: '/',
+      path: '/landing',
       name: 'landing-page',
       component: require('../components/LandingPage').default
     },
@@ -20,6 +20,11 @@ const { ipcRenderer } = require('electron');
     {
       path: '*',
       redirect: '/'
+    },
+    {
+      path: "/",
+      name: 'dirSelector',
+      component: require('../components/pages/DirSelector').default
     }
   ]
 })
