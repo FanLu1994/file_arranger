@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: 'file arranger'
+    name: 'file_arranger'
   }
 </script>
 
