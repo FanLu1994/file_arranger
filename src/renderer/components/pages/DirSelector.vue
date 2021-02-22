@@ -5,7 +5,8 @@
     <input v-model="dir" class="input is-primary" type="text" placeholder="Primary input"  >
     <input v-model="path" class="input is-primary" type="text" placeholder="Primary input"  >
 
-    <div v-for="file in filesArray">
+    <progress class="progress is-info" max="100" v-show="showProgress">30%</progress>
+    <div v-for="file in filesArray" v-show="showFileArray">
       <p>{{file}}</p>
     </div>
 
@@ -26,6 +27,10 @@ name: "DirSelector",
       dir : "",
 
       filesArray:[],
+
+
+      showProgress:false,
+      showFileArray:false,
     }
   },
 
@@ -45,7 +50,13 @@ name: "DirSelector",
       this.dir = result
       this.setPath(result)
       this.filesArray = []
-      this.getAllFile(result[0])
+
+      this.showProgress = true
+      let ret = this.getAllFile(result[0])
+      if(ret){
+        this.showProgress = false
+        this.showFileArray = true
+      }
     },
 
     //将文件夹路径设置为全局状态
@@ -82,6 +93,8 @@ name: "DirSelector",
           })
         }
       })
+
+      return true;
     },
   }
 }
