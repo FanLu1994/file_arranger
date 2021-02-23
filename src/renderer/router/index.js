@@ -22,9 +22,14 @@ const { ipcRenderer } = require('electron');
       redirect: '/'
     },
     {
-      path: "/",
+      path: "/test",
       name: 'dirSelector',
       component: require('../components/pages/DirSelector').default
+    },
+    {
+      path: "/",
+      name: 'SelectDir',
+      component: require('../pages/SelectDirPage').default
     }
   ]
 })

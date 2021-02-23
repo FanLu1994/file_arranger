@@ -5,6 +5,7 @@ const dir = {
     },
     mutations: {
         CHANGE_PATH: (state,path) => {
+            console.log("CHANGE_PATH",path)
             state.path = path
         },
     },
