@@ -22,5 +22,8 @@ new Vue({
 
 // 路由守卫
 router.beforeEach((to,from,next)=>{
+  console.log(from)
+  console.log(to)
   console.log("从"+from+"到"+to)
+  next()
 })

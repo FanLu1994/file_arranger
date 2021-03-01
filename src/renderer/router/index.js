@@ -30,6 +30,11 @@ const { ipcRenderer } = require('electron');
       path: "/",
       name: 'SelectDir',
       component: require('../pages/SelectDirPage').default
+    },
+    {
+      path:"/fileList",
+      name:'FileList',
+      component: require('../pages/FileListPage').default
     }
   ]
 })

@@ -66,7 +66,7 @@ export default
     },
 
     gotoFileHandler(){
-
+      this.$router.push("/fileList")
     },
 
   }
