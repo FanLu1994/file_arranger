@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import dir from "./modules/Dir";
+import file from "./modules/File";
 
 import { createPersistedState, createSharedMutations } from 'vuex-electron'
 import getters from "./getters";
@@ -21,6 +22,7 @@ Vue.use(Vuex)
 const store =new Vuex.Store({
   modules:{
     dir,
+    file,
   },
   getters
 })

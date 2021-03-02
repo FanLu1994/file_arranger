@@ -42,6 +42,8 @@ export default
   data(){
     return {
       dir : "",
+
+      filesArray:[],
     }
   },
 
@@ -63,7 +65,44 @@ export default
     setPath(path){
       console.log(path[0])
       this.$store.dispatch('ChangePath',path[0])
+
+      let ret = this.getAllFile(path[0])
+
+      this.$store.dispatch('saveList',this.filesArray)
     },
+
+    // 获取文件夹下所有文件
+    getAllFile(targetPath){
+      let that  = this;
+
+      fs.readdir(targetPath,function (err,files) {
+        if(err){
+          console.error(err)
+        }else{
+          files.forEach(function (filename) {    // 遍历当前path下所有文件
+            let filePath = path.join(targetPath,filename)
+
+            fs.stat(filePath,function (err, stats){  // 判断文件是否是文件夹
+              if(err){
+                console.error(err)
+              }else{
+                let isFile = stats.isFile();
+                let isDir = stats.isDirectory();
+                if(isFile){
+                  // console.log(filename)
+                  that.filesArray.push(filePath)   //递归处理文件夹
+                }else{
+                  that.getAllFile(filePath)
+                }
+              }
+            })
+          })
+        }
+      })
+
+      return true;
+    },
+
 
     gotoFileHandler(){
       this.$router.push("/fileList")
