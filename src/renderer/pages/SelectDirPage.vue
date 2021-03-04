@@ -69,6 +69,7 @@ export default
       let ret = this.getAllFile(path[0])
 
       this.$store.dispatch('saveList',this.filesArray)
+
     },
 
     // 获取文件夹下所有文件

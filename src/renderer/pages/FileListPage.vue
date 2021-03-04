@@ -22,12 +22,19 @@
 </template>
 
 <script>
+import Classifier from '../utils/FileClassfication'
+
 export default {
 name: "FileListPage",
   data(){
     return {
       fileList: [1,2,3,4,5,6,7,8,9]
     }
+  },
+
+  created() {
+    // 调用文件分类器
+    Classifier()
   }
 }
 </script>
