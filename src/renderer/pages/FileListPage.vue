@@ -2,17 +2,26 @@
 
   <div>
 
-    <div id="box">
+    <div id="block">
+      <button class="button is-primary" @click="gotoMainPage">Primary</button>
+    </div>
 
-      <ul>
-        <li v-for="file in fileList">
+    <div id="box">
+      <div v-for="type in Object.keys(fileMap)">
+        <div>文件类型: {{type}}</div>
+
+        <ul>
+        <li v-for="file in fileMap[type]">
           <figure class="image is-128x128">
             <img src="../assets/icon/file.png">
           </figure>
           <br>
-          <h4 id="fileName">{{file}}</h4>
+          <div id="fileName" class="block">{{getFileName(file)}}</div>
         </li>
-      </ul>
+        </ul>
+
+      </div>
+
 
     </div>
 
@@ -23,6 +32,8 @@
 
 <script>
 import Classifier from '../utils/FileClassfication'
+import { mapGetters } from 'vuex'
+const path = require("path");
 
 export default {
 name: "FileListPage",
@@ -35,6 +46,26 @@ name: "FileListPage",
   created() {
     // 调用文件分类器
     Classifier()
+  },
+
+  computed:{
+    ...mapGetters([
+        'fileMap',
+    ])
+  },
+
+  methods:{
+    gotoMainPage(){
+      this.$router.push("/")
+    },
+
+
+    //获取文件名
+    getFileName(filePath){
+      let fileInfo =  path.parse(filePath)
+      return fileInfo.name+fileInfo.ext
+    }
+
   }
 }
 </script>
@@ -58,6 +89,7 @@ name: "FileListPage",
 
 #fileName{
   text-align: center;
+  width: 128px;
 }
 
 </style>
