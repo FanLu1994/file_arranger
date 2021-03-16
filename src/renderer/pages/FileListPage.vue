@@ -3,7 +3,7 @@
   <div>
 
     <div id="block">
-      <button class="button is-primary" @click="gotoMainPage">Primary</button>
+      <button class="button is-primary" @click="gotoMainPage">返回</button>
     </div>
 
     <div id="box">
@@ -12,11 +12,11 @@
 
         <ul>
         <li v-for="file in fileMap[type]">
-          <figure class="image is-128x128">
-            <img src="../assets/icon/file.png">
-          </figure>
+<!--          <figure class="image is-128x128">-->
+<!--            <img src="../assets/icon/file.png">-->
+<!--          </figure>-->
           <br>
-          <div id="fileName" class="block">{{getFileName(file)}}</div>
+          <div id="fileName" >{{getFileName(file)}}</div>
         </li>
         </ul>
 
@@ -29,6 +29,8 @@
 
 
 </template>
+
+
 
 <script>
 import Classifier from '../utils/FileClassfication'

@@ -9,7 +9,7 @@ export default function Classifier() {
     let fileMap = {}
 
     store.getters.files.forEach(function (item){
-        console.log(item)
+        // console.log(item)
         // TODO 实现文件分类
 
         // 解析文件路径
