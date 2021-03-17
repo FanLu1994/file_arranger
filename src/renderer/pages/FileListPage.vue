@@ -3,24 +3,31 @@
   <div>
 
     <div id="block">
-      <button class="button is-primary" @click="gotoMainPage">返回</button>
+<!--      <button class="button is-primary" @click="gotoMainPage">返回</button>-->
+      <Icon type="ios-arrow-back" @click="gotoMainPage" id="home_icon" size="50" color="#35AC5E"/>
     </div>
 
     <div id="box">
-      <div v-for="type in Object.keys(fileMap)">
-        <div>文件类型: {{type}}</div>
+      <Collapse v-for="type in Object.keys(fileMap)">
+        <Panel id="collapse_panel">
+          <Button type="success" id="fileTypeName">{{type}}</Button>
+          <p slot="content">
+            <List  size="large" v-for="file in fileMap[type]">
+              <ListItem>{{ getFileName(file) }}</ListItem>
+            </List>
+          </p>
+        </Panel>
 
-        <ul>
-        <li v-for="file in fileMap[type]">
-<!--          <figure class="image is-128x128">-->
-<!--            <img src="../assets/icon/file.png">-->
-<!--          </figure>-->
-          <br>
-          <div id="fileName" >{{getFileName(file)}}</div>
-        </li>
-        </ul>
+      </Collapse>
 
-      </div>
+<!--      <div v-for="type in Object.keys(fileMap)">-->
+<!--        <div>文件类型: {{type}}</div>-->
+
+<!--        <List  size="large" v-for="file in fileMap[type]">-->
+<!--          <ListItem>{{ getFileName(file) }}</ListItem>-->
+<!--        </List>-->
+
+<!--      </div>-->
 
 
     </div>
@@ -73,6 +80,10 @@ name: "FileListPage",
 </script>
 
 <style scoped>
+#box{
+  margin-left: 15%;
+  margin-right: 15%;
+}
 
 #box ul{
   display: flex;
@@ -82,11 +93,20 @@ name: "FileListPage",
   padding: 3px;
   list-style: none;
   margin-right: 15px;
-  border: 1px solid #eee;
+  /*border: 1px solid #eee;*/
 }
 #box img{
   width: 200px;
   height: 150px;
+}
+
+#collapse_panel{
+  margin-left: 15px;
+}
+
+#fileTypeName{
+  width: 60px;
+  height: 100%;
 }
 
 #fileName{
