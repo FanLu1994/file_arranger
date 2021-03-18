@@ -75,7 +75,7 @@ function createWindow () {
    */
   // 自定义菜单栏
   const appMenu = Menu.buildFromTemplate(template)
-  Menu.setApplicationMenu(appMenu)
+  Menu.setApplicationMenu(null)
 
   mainWindow = new BrowserWindow({
     height: 563,

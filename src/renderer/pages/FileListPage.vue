@@ -2,35 +2,30 @@
 
   <div>
 
-    <div id="block">
-<!--      <button class="button is-primary" @click="gotoMainPage">返回</button>-->
-      <Icon type="ios-arrow-back" @click="gotoMainPage" id="home_icon" size="50" color="#35AC5E"/>
-    </div>
+    <Row :gutter="20" id="back_home_wrapper">
+      <Col span="12" offset="2" >
+<!--        <Icon type="ios-arrow-back" @click="gotoMainPage" id="home_icon" size="30" color="#35AC5E"></Icon>-->
+        <Button  style="background-color:#35AC5E; color: white" icon="ios-arrow-back" @click="gotoMainPage">返回首页</Button>
+      </Col>
 
-    <div id="box">
-      <Collapse v-for="type in Object.keys(fileMap)">
-        <Panel id="collapse_panel">
-          <Button type="success" id="fileTypeName">{{type}}</Button>
-          <p slot="content">
-            <List  size="large" v-for="file in fileMap[type]">
-              <ListItem>{{ getFileName(file) }}</ListItem>
-            </List>
-          </p>
-        </Panel>
+    </Row>
 
-      </Collapse>
+    <Row :gutter="20" id="file_wrapper">
+      <Col span="20" offset="2">
+        <Collapse v-for="type in Object.keys(fileMap)">
+          <Panel id="collapse_panel">
+            <Button type="success" id="fileTypeName">{{type}}</Button>
+            <p slot="content">
+              <List  size="large" v-for="file in fileMap[type]">
+                <ListItem>{{ getFileName(file) }}</ListItem>
+              </List>
+            </p>
+          </Panel>
 
-<!--      <div v-for="type in Object.keys(fileMap)">-->
-<!--        <div>文件类型: {{type}}</div>-->
+        </Collapse>
+      </Col>
+    </Row>
 
-<!--        <List  size="large" v-for="file in fileMap[type]">-->
-<!--          <ListItem>{{ getFileName(file) }}</ListItem>-->
-<!--        </List>-->
-
-<!--      </div>-->
-
-
-    </div>
 
   </div>
 
@@ -112,6 +107,10 @@ name: "FileListPage",
 #fileName{
   text-align: center;
   width: 128px;
+}
+
+#back_home_wrapper{
+  margin-bottom: 10px;
 }
 
 </style>
