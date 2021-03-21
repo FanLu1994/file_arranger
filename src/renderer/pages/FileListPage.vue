@@ -11,18 +11,23 @@
     </Row>
 
     <Row :gutter="20" id="file_wrapper">
-      <Col span="20" offset="2">
-        <Collapse v-for="type in Object.keys(fileMap)">
-          <Panel id="collapse_panel">
-            <Button type="success" id="fileTypeName">{{type}}</Button>
-            <p slot="content">
-              <List  size="large" v-for="file in fileMap[type]">
-                <ListItem>{{ getFileName(file) }}</ListItem>
-              </List>
-            </p>
-          </Panel>
+      <Col span="14" offset="2">
+        <div v-for="type in Object.keys(fileMap)" :id="'type-'+type">
+          <Button type="success" ghost> 类型:{{type}}</Button>
+          <Button type="success" ghost> 移动到新文件夹</Button>
+          <Button type="success" ghost> 复制到新文件夹</Button>
 
-        </Collapse>
+          <List   border id="list">
+            <ListItem v-for="file in fileMap[type]">{{ getFileName(file) }}</ListItem>
+          </List>
+
+        </div>
+      </Col>
+
+      <Col span="6" offset="2">
+        <Anchor show-ink  >
+          <AnchorLink v-for="type in Object.keys(fileMap)" :href="'#type-'+type" :title="'类型:'+type" />
+        </Anchor>
       </Col>
     </Row>
 
@@ -111,6 +116,12 @@ name: "FileListPage",
 
 #back_home_wrapper{
   margin-bottom: 10px;
+}
+
+
+#list{
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 </style>
