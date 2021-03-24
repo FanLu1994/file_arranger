@@ -14,8 +14,8 @@
       <Col span="16" offset="2">
         <div v-for="type in Object.keys(fileMap)" :id="'type-'+type">
           <Button type="success" ghost class="btn"> 类型:{{type}}</Button>
-          <Button type="success" ghost class="btn" @click="openDir(type)"> 移动到新文件夹</Button>
-          <Button type="success" ghost class="btn" @click="openDir(type)"> 复制到新文件夹</Button>
+          <Button type="success" ghost class="btn" @click="openDir(type,1)"> 移动到新文件夹</Button>
+          <Button type="success" ghost class="btn" @click="openDir(type,2)"> 复制到新文件夹</Button>
 
           <List   border id="list">
             <ListItem v-for="file in fileMap[type]">{{ getFileName(file) }}</ListItem>
@@ -79,8 +79,8 @@ name: "FileListPage",
       return fileInfo.name+fileInfo.ext
     },
 
-    // 打开文件夹
-    openDir(type){
+    // 打开文件夹移动或复制  opt 1为移动 2为复制
+    openDir(type,opt){
       console.log(type)
 
       // 选择文件夹
@@ -108,8 +108,27 @@ name: "FileListPage",
           //如果这个文件已经存在，就进入下一个循环
           console.log("文件夹已经存在")
         }
+
+        that.moveFile(that.targetPath,type,opt)
       })
     },
+
+
+    moveFile(targetPath,type,opt){
+      let that = this
+      this.fileMap[type].forEach(item=>{
+        console.log(item)
+        this.copyFile(item,path.join(targetPath,that.getFileName(item)))
+
+        if(opt===1){
+          fs.unlinkSync(item);
+        }
+      })
+    },
+
+    copyFile(src, dist) {
+      fs.writeFileSync(dist, fs.readFileSync(src));
+    }
 
   }
 }

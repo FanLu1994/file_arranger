@@ -81,7 +81,9 @@ function createWindow () {
     height: 563,
     useContentSize: true,
     // frame: false,
-    width: 1000
+    width: 1000,
+    // frame: false, //取消window自带的关闭最小化等
+    resizable: false //禁止改变主窗口尺寸
   })
 
   mainWindow.loadURL(winURL)
