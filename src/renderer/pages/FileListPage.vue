@@ -113,21 +113,51 @@ name: "FileListPage",
       })
     },
 
-
+    /**
+     * 移动或复制文件到新文件夹
+     * @param targetPath  目标路径
+     * @param type  文件类型
+     * @param opt   操作类型 1为移动,2位复制
+     */
     moveFile(targetPath,type,opt){
       let that = this
       this.fileMap[type].forEach(item=>{
-        console.log(item)
-        this.copyFile(item,path.join(targetPath,that.getFileName(item)))
+        let newPath = path.join(targetPath,that.getFileName(item))
+        console.log(newPath)
+        // 检查文件是否存在
+        if(!fs.existsSync(newPath)){
+          // 执行复制操作
+          fs.writeFileSync(newPath, fs.readFileSync(item));
+          // 如果选择的是移动,则把源文件删除
+          if(opt===1){
+            fs.unlinkSync(item);
+            that.successNotify("移动文件成功!")
+          }else{
+            that.successNotify("复制文件成功!")
+          }
 
-        if(opt===1){
-          fs.unlinkSync(item);
+        }else{
+          that.failNotify("文件已经存在了")
         }
       })
+
     },
 
-    copyFile(src, dist) {
-      fs.writeFileSync(dist, fs.readFileSync(src));
+
+    // 胜利提示
+    successNotify (msg) {
+      this.$Notice.success({
+        title: '操作成功!',
+        desc:  msg
+      });
+    },
+
+    // 失败提示
+    failNotify (msg) {
+      this.$Notice.error({
+        title: '操作失败!',
+        desc:  msg
+      });
     }
 
   }
